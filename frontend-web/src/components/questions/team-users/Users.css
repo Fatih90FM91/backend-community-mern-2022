@@ -1,0 +1,35 @@
+body{
+   font-family:Georgia, 'Times New Roman', Times, serif;
+   
+}
+
+
+h1{
+    text-align: center;
+    color: #F3F6C8;
+}
+
+.all-team{
+    text-align: center;
+    display: flex;
+    /* justify-content:space-between; */
+    margin-top: 20px;
+    flex-wrap: wrap;
+    /* border: 1px solid; */
+}
+
+.users{
+    border: 1px solid #EEEDED;
+    background-color: #FEF778;
+    border-radius: 5px;
+    
+}
+
+.users:hover{
+    background-color: aquamarine;
+}
+
+p {
+    font-size: 15px;
+    padding: 10px;
+}

@@ -1,0 +1,58 @@
+<%- include('../components/header') %>
+
+
+
+
+<div class="card newQuestionPage">
+    <img class="question-img" src="https://charity.org/sites/charity.org/files/partner_logos/ING_Logo.png" alt="logo" >
+    <div class="card-header">
+        This Question is from : <span><%= question.user_id.username %></span>
+    </div>
+    <div class="card-body show-question-page">
+      <h2 class="card-title question-color"><%= question.question %></h2>
+      <p class="card-text"><%= question.description %></p>
+      <div class="questionBtn">
+        <a class="btn btn-warning" href="/edit-question/<%= question.id %>">Edit Question</a>
+        <a class="btn btn-danger" href="/delete-question/<%= question.id %>">Delete Question</a>
+    </div>
+    </div>
+  </div>
+  <p class="date-of-question"><%= question.created_at%></p>
+
+
+
+
+  <% if(answers.length){ %>
+    <% answers.forEach( answer => { %>
+        <div class="card answer-card">
+            <div class="card-header answer-header">
+                This Answer is from : <span><%= answer.user_id.username %> </span>
+            </div>
+            <div class="card-body answer-font">
+                <h5 class="card-title"><%= answer.answer %></h5>
+                <a class="btn btn-danger" href="/delete-answer/<%= answer.id %>">Delete Answer</a>
+            </div>
+        </div>
+    <% }) %>
+<% } else { %>
+    <p class="card card-header answer-header card-body answer-card no-answer">There is No answer!</p>
+<% } %>
+
+
+
+
+<div>
+
+  <form method="POST" action="/answerQuestion/<%= question._id %>" class="log_form" id="formAnswer">
+    <div class="mb-3">
+        <label for="answer" class="form-label">Answer This Question :</label>
+        <textarea name="answer" class="form-control" id="answer" rows="3"></textarea>
+        <small class="form-text warning answer">warning  </small>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+
+
+<%- include('../components/footer') %>

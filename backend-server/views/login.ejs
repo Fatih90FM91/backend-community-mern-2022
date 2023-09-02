@@ -1,0 +1,120 @@
+<%- include('./components/header') %>
+
+
+
+
+
+
+<div class="login card w-75">
+    <form method="POST" action="/login" class="log_form" id="formlogin">
+        <div class="login_title">
+            <h2>Log in</h2>
+            <a href="/signup">Sing Up</a>
+        </div>
+        <div class="mb-3 login-position">
+            <label for="email1" class="form-label">Email address</label>
+            <input name="email" type="email" class="form-control email" value="" id="email" ><i class="fa-brands fa-mailchimp"></i>
+           
+        </div>
+        <div class="email error erordesign" id="email"></div>
+
+        <div class="mb-3 login-position" >
+            <label for="password1" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control password" value="" id="password"><i class="fa-solid fa-key"></i>
+           
+        </div>
+        <div class="password error erordesign" id="password"></div>
+
+        <button type="submit" class="btn  btn-lg btn-color-signup">Log in</button>
+    </form>
+</div>
+
+<div class="col-sm-4 social-buttons">
+    <div class="card">
+      <div class="card-body">
+        <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button">
+          <i class="fab fa-google"></i>
+          Sign In with Google
+        </a>
+      </div>
+    </div>
+    <div class="card social-block">
+      <div class="card-body">
+        <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button">
+          <i class="fab fa-facebook"></i>
+          Sign Up with Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+
+<div class="pic-loginpage-ing"><img src="http://photos.prnewswire.com/prnfull/20100407/NY82932LOGO-b" alt="logo" width="50%"></div>
+
+
+
+<script>
+
+const form =document.getElementById('formlogin');
+
+const emailErr =document.querySelector('.email.error');
+const passwordErr =document.querySelector('.password.error');
+
+
+
+
+// usernameErr.textContent='hello guysss!!';
+ 
+// dataInfo.textContent='infoooo';
+form.addEventListener('submit' , async (e) => {
+    
+    e.preventDefault();
+ 
+   
+    //reset credentials
+           
+            emailErr.textContent='';
+            passwordErr.textContent='';
+
+    //get the values
+  
+    const email =form.email.value;
+    const password=form.password.value;
+
+
+
+    try {
+     
+        const res = await fetch('/login' ,{
+            method :'POST',
+            body: JSON.stringify({email,password}),
+            headers:{'Content-Type' : 'application/json'}
+
+        });
+
+        const data = await res.json();
+       
+
+        console.log(data);
+     
+        if(data.errors){
+
+            emailErr.textContent=data.errors.email;
+            passwordErr.textContent=data.errors.password;
+        }
+
+    
+
+   if(data.user){
+       location.assign('/');
+   }
+
+        
+    } catch (err) {
+        console.log(err);
+       
+    }
+});
+
+</script>
+
+<%- include('./components/footer') %>

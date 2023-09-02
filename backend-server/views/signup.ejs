@@ -1,0 +1,147 @@
+
+<%- include('./components/header') %>
+
+<div class="signup card w-75" style="width: 50%;">
+<form method="POST" action="/signup" id="signupform" >
+    <div class="login_title">
+        <h2 class="signup-head">Sign Up</h2>
+        <a href="/login">Login</a>
+    </div>
+
+
+<div class="input-group flex-nowrap username-error">
+    <span class="input-group-text" id="addon-wrapping">Username</span>
+    <input type="text" name="username" class="form-control username" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" > 
+   
+  </div>
+  <div class="username error erordesign">
+      
+</div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+    <input type="email" name="email" class="form-control email"  placeholder="email@gmail.com" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" > 
+  </div>
+  <div class="email error erordesign"></div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+    <input type="password" name="password" class="form-control password" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="***********" >
+  </div>
+  <div class="password error erordesign"></div>
+
+   <div class="submitBtnSigUp">
+  <button type="submit" class="btn btn-secondary btn-lg btn-color-signup" >Sign UP</button>
+  </div>
+  <div class="info">
+
+  </div>
+  </form>
+ 
+</div>
+
+<div class="col-sm-4 social-buttons-2">
+  <div class="card">
+    <div class="card-body">
+      <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button">
+        <i class="fab fa-google"></i>
+        Sign In with Google
+      </a>
+    </div>
+  </div>
+  <div class="card social-block">
+    <div class="card-body">
+      <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button">
+        <i class="fab fa-facebook"></i>
+        Sign Up with Facebook
+      </a>
+    </div>
+  </div>
+</div>
+
+<img src="https://geldgorilla.nl/wp-content/uploads/ing4.png" alt="logo" class="signup-img">
+
+
+<script >
+
+
+
+const form =document.getElementById('signupform');
+const usernameErr =document.querySelector('.username.error');
+const emailErr =document.querySelector('.email.error');
+const passwordErr =document.querySelector('.password.error');
+const dataInfo =document.querySelector('.info');
+
+const usernameIN =document.querySelector('.username');
+const emailIN =document.querySelector('.email');
+const passwordIN =document.querySelector('.password');
+
+// usernameErr.textContent='hello guysss!!';
+ 
+// dataInfo.textContent='infoooo';
+form.addEventListener('submit' , async (e) => {
+    
+    e.preventDefault();
+ 
+   
+    //reset credentials
+            usernameErr.textContent='';
+            emailErr.textContent='';
+            passwordErr.textContent='';
+
+    //get the values
+    const username =form.username.value;
+    const email =form.email.value;
+    const password=form.password.value;
+
+    console.log(username,email,password);
+
+    try {
+     
+        const res = await fetch('/signup' ,{
+            method :'POST',
+            body: JSON.stringify({username,email,password}),
+            headers:{'Content-Type' : 'application/json'}
+
+        });
+
+        const data = await res.json();
+        // console.log(data);
+
+       
+     
+        if(data.errors){
+
+            usernameErr.textContent=data.errors.username;
+            console.log( usernameErr.textContent);
+            emailErr.textContent=data.errors.email;
+            passwordErr.textContent=data.errors.password;
+        }
+
+        // if( emailErr &&  emailErr && usernameErr){
+        //     usernameIN.textContent="hunter1234"
+        //     emailIN.textContent ="hunterman@gmail.com";
+        //     passwordIN.textContent ="1234"
+        // }
+
+   if(data.user){
+       location.assign('/login');
+   }
+
+        
+    } catch (err) {
+        console.log(err);
+       
+    }
+});
+
+</script>
+
+
+
+
+
+
+
+  <%- include('./components/footer') %>
+

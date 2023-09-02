@@ -1,0 +1,19 @@
+.messages{
+    width: 50%;
+    margin-left: 60px;
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: antiquewhite;
+}
+
+.answer-css{
+    background-color: blueviolet;
+    border-style: ridge;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.answer-css:hover{
+    color: #F66E00;
+    background-color: #00AD7C;
+}

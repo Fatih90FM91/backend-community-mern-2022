@@ -1,0 +1,32 @@
+
+
+<%- include('../components/header') %>
+
+
+<div class="log askQuestionPage">
+
+    <form method="POST" action="/askQuestion" class="log_form">
+      <div class="mb-3">
+        <label for="question" class="form-label">Question :</label>
+        <input name="question" type="text" class="form-control" id="question">
+        <!-- <small class="form-text warning question">warning </small> -->
+      </div>
+
+      <div class="form-floating">
+        <textarea name="description" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+        <label for="floatingTextarea2">Comments</label>
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-danger">Submit</button>
+      <a href="/">
+        <button type="button" class="btn btn-warning">Cancel</button>
+      </a>
+  
+    </form> 
+   
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Map_of_ING.svg/450px-Map_of_ING.svg.png" alt="logo"  >
+  </div>
+
+
+
+  <%- include('../components/footer') %>
